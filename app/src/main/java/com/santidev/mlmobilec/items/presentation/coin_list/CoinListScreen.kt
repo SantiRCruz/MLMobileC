@@ -21,12 +21,12 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.santidev.mlmobilec.items.presentation.coin_list.components.BookSearchBar
 import com.santidev.mlmobilec.items.presentation.coin_list.components.CoinListItem
-import com.santidev.mlmobilec.items.presentation.coin_list.components.previewCoin
+import com.santidev.mlmobilec.items.presentation.coin_list.components.previewItem
 import com.santidev.mlmobilec.ui.theme.MLMobileCTheme
 
 @Composable
 fun CoinListScreen(
-    state: CoinListState,
+    state: ItemListState,
     onAction: (CoinListAction) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -64,11 +64,11 @@ fun CoinListScreen(
                     .fillMaxSize(),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                items(state.coins) { coinUi ->
+                items(state.searchResults) { itemUi ->
                     CoinListItem(
-                        coinUi = coinUi,
+                        itemUi = itemUi,
                         onClick = {
-                            onAction(CoinListAction.OnCoinClick(coinUi))
+                            onAction(CoinListAction.OnCoinClick(itemUi))
                         },
                         modifier = Modifier.fillMaxWidth()
                     )
@@ -84,9 +84,9 @@ fun CoinListScreen(
 private fun CoinListScreenPreview() {
     MLMobileCTheme {
         CoinListScreen(
-            state = CoinListState(
-                coins = (1..100).map {
-                    previewCoin.copy(id = it.toString())
+            state = ItemListState(
+                searchResults = (1..100).map {
+                    previewItem.copy(id = it.toString())
                 }
             ),
             modifier = Modifier

@@ -13,19 +13,19 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.santidev.mlmobilec.core.presentation.toUiText
 import com.santidev.mlmobilec.core.presentation.util.ObserveAsEvents
-import com.santidev.mlmobilec.core.presentation.util.toString
 import com.santidev.mlmobilec.items.presentation.coin_detail.CoinDetailScreen
 import com.santidev.mlmobilec.items.presentation.coin_list.CoinListAction
 import com.santidev.mlmobilec.items.presentation.coin_list.CoinListEvent
 import com.santidev.mlmobilec.items.presentation.coin_list.CoinListScreen
-import com.santidev.mlmobilec.items.presentation.coin_list.CoinListViewModel
+import com.santidev.mlmobilec.items.presentation.coin_list.ItemListViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun AdaptiveCoinListDetailPane(
     modifier: Modifier = Modifier,
-    viewModel: CoinListViewModel = koinViewModel()
+    viewModel: ItemListViewModel = koinViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val context = LocalContext.current
@@ -34,7 +34,7 @@ fun AdaptiveCoinListDetailPane(
             is CoinListEvent.Error -> {
                 Toast.makeText(
                     context,
-                    event.error.toString(context),
+                    event.error.toUiText().toString(),
                     Toast.LENGTH_LONG
                 ).show()
             }
@@ -49,7 +49,6 @@ fun AdaptiveCoinListDetailPane(
                 CoinListScreen(
                     state = state,
                     onAction = { action ->
-                        viewModel.onAction(action)
                         when (action) {
                             is CoinListAction.OnCoinClick -> {
                                 navigator.navigateTo(
@@ -57,8 +56,9 @@ fun AdaptiveCoinListDetailPane(
                                 )
                             }
 
-                            is CoinListAction.OnSearchQueryChange -> TODO()
+                            else -> Unit
                         }
+                        viewModel.onAction(action)
                     }
                 )
             }

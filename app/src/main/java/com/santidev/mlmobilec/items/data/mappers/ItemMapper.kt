@@ -1,21 +1,19 @@
 package com.santidev.mlmobilec.items.data.mappers
 
-import com.santidev.mlmobilec.items.data.networking.dto.CoinDto
+import com.santidev.mlmobilec.items.data.networking.dto.ItemDto
 import com.santidev.mlmobilec.items.data.networking.dto.CoinPriceDto
-import com.santidev.mlmobilec.items.domain.Coin
+import com.santidev.mlmobilec.items.domain.Item
 import com.santidev.mlmobilec.items.domain.CoinPrice
 import java.time.Instant
 import java.time.ZoneId
 
-fun CoinDto.toCoin(): Coin {
-    return Coin(
+fun ItemDto.toItem(): Item {
+    return Item(
         id = id,
-        rank = rank,
-        name = name,
-        symbol = symbol,
-        marketCapUsd = marketCapUsd,
-        priceUsd = priceUsd,
-        changePercent24Hr = changePercent24Hr
+        title = title ?: "Title Not Found",
+        url = thumbnail ?: "",
+        originalPrice = originalPrice ?: 0.0,
+        price = price ?: 0.0
     )
 }
 
