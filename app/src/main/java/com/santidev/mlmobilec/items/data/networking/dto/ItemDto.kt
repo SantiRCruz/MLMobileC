@@ -9,5 +9,7 @@ data class ItemDto(
     @SerialName("title") val title: String? = null,
     @SerialName("thumbnail") val thumbnail: String? = null,
     @SerialName("original_price") val originalPrice: Double? = null,
-    @SerialName("price") val price: Double? = null
+    @SerialName("price") val price: Double? = null,
+    @SerialName("sale_price") val salePrice: SalePriceDto,
+    @SerialName("seller") val seller: SellerDto
 )

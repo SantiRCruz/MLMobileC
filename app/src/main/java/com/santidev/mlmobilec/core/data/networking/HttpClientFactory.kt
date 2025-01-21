@@ -36,7 +36,7 @@ object HttpClientFactory {
                 requestTimeoutMillis = 20_000L
             }
             defaultRequest {
-                header(HttpHeaders.Authorization, "Bearer APP_USR-5619395434815929-011715-241d513772f6a272deea2f4a93e4e45b-465480846")
+                header(HttpHeaders.Authorization, "Bearer TG-678bd7231974770001aac8a8-465480846")
                 contentType(ContentType.Application.Json)
             }
         }

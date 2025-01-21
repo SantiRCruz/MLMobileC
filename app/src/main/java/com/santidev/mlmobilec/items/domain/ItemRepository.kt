@@ -7,10 +7,4 @@ interface ItemRepository {
     suspend fun searchItems(
         query: String
     ): Result<List<Item>, DataError.Remote>
-
-//    suspend fun getCoinHistory(
-//        coinId: String,
-//        start: ZonedDateTime,
-//        end: ZonedDateTime
-//    ): Result<List<CoinPrice>, DataError.Remote>
 }

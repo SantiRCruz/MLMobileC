@@ -5,5 +5,7 @@ data class Item(
     val title: String,
     val url: String,
     val originalPrice: Double,
-    val price: Double
+    val price: Double,
+    val type: String,
+    val seller: String
 )

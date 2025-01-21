@@ -6,7 +6,7 @@ import com.santidev.mlmobilec.core.data.networking.HttpClientFactory
 import com.santidev.mlmobilec.items.data.networking.RemoteItemDataSource
 import com.santidev.mlmobilec.items.domain.ItemRepository
 import io.ktor.client.engine.cio.CIO
-import com.santidev.mlmobilec.items.presentation.coin_list.ItemListViewModel
+import com.santidev.mlmobilec.items.presentation.item_list.ItemListViewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind

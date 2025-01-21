@@ -20,12 +20,4 @@ class DefaultItemRepository(
                 dto.results.map { it.toItem() }
             }
     }
-
-//    override suspend fun getCoinHistory(
-//        coinId: String,
-//        start: ZonedDateTime,
-//        end: ZonedDateTime
-//    ): Result<List<CoinPrice>, DataError.Remote> {
-//
-//    }
 }

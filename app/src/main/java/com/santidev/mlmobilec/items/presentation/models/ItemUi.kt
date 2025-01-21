@@ -9,7 +9,11 @@ data class ItemUi(
     val title: String,
     val url: String,
     val originalPrice: DisplayableNumber,
-    val price: DisplayableNumber
+    val price: DisplayableNumber,
+    val discount: String,
+    val hasDiscount: Boolean,
+    val type: String,
+    val seller: String
 )
 
 data class DisplayableNumber(
@@ -21,10 +25,13 @@ fun Item.toItemUi(): ItemUi {
     return ItemUi(
         id = id,
         title = title,
-        url = url,
+        url = url.toHttps(),
         originalPrice = originalPrice.toDisplayableNumber(),
         price = price.toDisplayableNumber(),
-//        iconRes = getDrawableIdForCoin(symbol)
+        discount = calculateDiscountPercentage(originalPrice, discountedPrice = price),
+        hasDiscount = hasDiscount(originalPrice, price),
+        type = type,
+        seller = seller
     )
 }
 
@@ -37,4 +44,22 @@ fun Double.toDisplayableNumber(): DisplayableNumber {
         value = this,
         formatted = formatter.format(this)
     )
+}
+
+fun String.toHttps(): String {
+    return if (this.startsWith("http://")) {
+        this.replaceFirst("http://", "https://")
+    } else {
+        this
+    }
+}
+
+fun calculateDiscountPercentage(originalPrice: Double, discountedPrice: Double): String {
+    val discount = originalPrice - discountedPrice
+    val discountPercentage = (discount / originalPrice) * 100
+    return "%.2f".format(discountPercentage)
+}
+
+fun hasDiscount(originalPrice: Double, discountedPrice: Double): Boolean {
+    return discountedPrice < originalPrice
 }
